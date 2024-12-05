@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -38,7 +38,6 @@ async function run() {
     // get only user uploaded equipment
     app.get("/equipments/user", async (req, res) => {
       const email = req.query.email;
-      console.log(email);
       const result = await equipmentCollection.find({email}).toArray();
         res.send(result);
     });
@@ -49,6 +48,14 @@ async function run() {
       const result = await equipmentCollection.insertOne(newEquipment);
       res.send(result);
     });
+
+    // delete equipment
+    app.delete('/equipments/:id',async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)};
+        const result = await equipmentCollection.deleteOne(query);
+        res.send(result);
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
