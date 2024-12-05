@@ -38,8 +38,39 @@ async function run() {
     // get only user uploaded equipment
     app.get("/equipments/user", async (req, res) => {
       const email = req.query.email;
-      const result = await equipmentCollection.find({email}).toArray();
-        res.send(result);
+      const result = await equipmentCollection.find({ email }).toArray();
+      res.send(result);
+    });
+
+    // get an equipment for update
+    app.get("/equipments/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await equipmentCollection.findOne(query);
+      res.send(result);
+    });
+
+    // update a coffe
+    app.put("/equipments/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedEquipment = req.body;
+      const equipment = {
+        $set: {
+          image:updatedEquipment.image,
+          itemName:updatedEquipment.itemName,
+          category:updatedEquipment.category,
+          description:updatedEquipment.description,
+          price:updatedEquipment.price,
+          rating:updatedEquipment.rating,
+          customization:updatedEquipment.customization,
+          processingTime:updatedEquipment.processingTime,
+          stockStatus:updatedEquipment.stockStatus,
+        },
+      };
+      const result = await equipmentCollection.updateOne(filter,equipment, options);
+      res.send(result);
     });
 
     // post euipment
@@ -50,12 +81,12 @@ async function run() {
     });
 
     // delete equipment
-    app.delete('/equipments/:id',async(req,res)=>{
-        const id = req.params.id;
-        const query = {_id: new ObjectId(id)};
-        const result = await equipmentCollection.deleteOne(query);
-        res.send(result);
-    })
+    app.delete("/equipments/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await equipmentCollection.deleteOne(query);
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
