@@ -28,25 +28,26 @@ async function run() {
 
     const equipmentCollection = client.db("A10-DB").collection("euipments");
 
-    // get all equipments and category wise equipment
+    // get all equipments
     app.get("/equipments", async (req, res) => {
+      const cursor = equipmentCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    // get category wise data
+    app.get("/equipments/categories", async (req, res) => {
       const category = req.query.category;
-      let result;
-      if (category) {
-        result = await equipmentCollection
-          .find({ category: category })
-          .toArray();
-      } else {
-        const cursor = equipmentCollection.find();
-        result = await cursor.toArray();
-      }
+      const result = await equipmentCollection
+        .find({ category: category })
+        .toArray();
       res.send(result);
     });
 
     // get only user uploaded equipment
     app.get("/equipments/user", async (req, res) => {
       const email = req.query.email;
-      const result = await equipmentCollection.find({ email }).toArray();
+      const result = await equipmentCollection.find({ email: email }).toArray();
       res.send(result);
     });
 
