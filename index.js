@@ -28,10 +28,18 @@ async function run() {
 
     const equipmentCollection = client.db("A10-DB").collection("euipments");
 
-    // get all equipments
+    // get all equipments and category wise equipment
     app.get("/equipments", async (req, res) => {
-      const cursor = equipmentCollection.find();
-      const result = await cursor.toArray();
+      const category = req.query.category;
+      let result;
+      if (category) {
+        result = await equipmentCollection
+          .find({ category: category })
+          .toArray();
+      } else {
+        const cursor = equipmentCollection.find();
+        result = await cursor.toArray();
+      }
       res.send(result);
     });
 
@@ -58,18 +66,22 @@ async function run() {
       const updatedEquipment = req.body;
       const equipment = {
         $set: {
-          image:updatedEquipment.image,
-          itemName:updatedEquipment.itemName,
-          category:updatedEquipment.category,
-          description:updatedEquipment.description,
-          price:updatedEquipment.price,
-          rating:updatedEquipment.rating,
-          customization:updatedEquipment.customization,
-          processingTime:updatedEquipment.processingTime,
-          stockStatus:updatedEquipment.stockStatus,
+          image: updatedEquipment.image,
+          itemName: updatedEquipment.itemName,
+          category: updatedEquipment.category,
+          description: updatedEquipment.description,
+          price: updatedEquipment.price,
+          rating: updatedEquipment.rating,
+          customization: updatedEquipment.customization,
+          processingTime: updatedEquipment.processingTime,
+          stockStatus: updatedEquipment.stockStatus,
         },
       };
-      const result = await equipmentCollection.updateOne(filter,equipment, options);
+      const result = await equipmentCollection.updateOne(
+        filter,
+        equipment,
+        options
+      );
       res.send(result);
     });
 
