@@ -35,6 +35,13 @@ async function run() {
       res.send(result);
     });
 
+    // get featured equipment
+    app.get("/equipments/featured", async (req, res) => {
+      const cursor = equipmentCollection.find().limit(6);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // get category wise data
     app.get("/equipments/categories", async (req, res) => {
       const category = req.query.category;
