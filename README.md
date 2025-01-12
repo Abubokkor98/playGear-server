@@ -2,9 +2,8 @@
 
 This is the backend server for **PlayGear**, the sports gear shopping platform. It is built using **Node.js**, **Express**, and **MongoDB** to handle CRUD operations for the equipment available on the platform. The server provides API endpoints for accessing, adding, updating, and deleting equipment details.
 
-🔗 **Live API Endpoint:**  
-- [PlayGear Backend (Vercel)](https://assignment-10-server-ab.vercel.app/)  
-- [PlayGear Frontend (Firebase)](https://assignment-10-2cdec.web.app/)  
+🔗 **client Side Live Link:**  
+- [PlayGear client](https://playgear.netlify.app/)  
 
 ---
 
