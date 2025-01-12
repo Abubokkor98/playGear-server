@@ -99,13 +99,13 @@ Deletes an equipment item from the database by its ID.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/Abubokkor98/playgear-backend.git
+    git clone https://github.com/Abubokkor98/playGear-server.git
     ```
 
 2. Install dependencies:
 
     ```bash
-    cd playgear-backend
+    cd playGear-server
     npm install
     ```
 
@@ -129,7 +129,7 @@ The server will be running on `http://localhost:5000` by default.
 
 ### **🛠️ Project Structure**
 
-playgear-backend/
+playGear-server/
 │
 ├── .env                    # Environment variables (e.g., DB credentials)
 ├── node_modules/           # Dependencies installed via npm
