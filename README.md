@@ -2,9 +2,8 @@
 
 This is the backend server for **PlayGear**, the sports gear shopping platform. It is built using **Node.js**, **Express**, and **MongoDB** to handle CRUD operations for the equipment available on the platform. The server provides API endpoints for accessing, adding, updating, and deleting equipment details.
 
-🔗 **Live API Endpoint:**  
-- [PlayGear Backend (Vercel)](https://assignment-10-server-ab.vercel.app/)  
-- [PlayGear Frontend (Firebase)](https://assignment-10-2cdec.web.app/)  
+🔗 **client Side Live Link:**  
+- [PlayGear client](https://playgear.netlify.app/)  
 
 ---
 
@@ -100,13 +99,13 @@ Deletes an equipment item from the database by its ID.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/Abubokkor98/playgear-backend.git
+    git clone https://github.com/Abubokkor98/playGear-server.git
     ```
 
 2. Install dependencies:
 
     ```bash
-    cd playgear-backend
+    cd playGear-server
     npm install
     ```
 
@@ -130,7 +129,7 @@ The server will be running on `http://localhost:5000` by default.
 
 ### **🛠️ Project Structure**
 
-playgear-backend/
+playGear-server/
 │
 ├── .env                    # Environment variables (e.g., DB credentials)
 ├── node_modules/           # Dependencies installed via npm
